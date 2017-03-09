@@ -9,7 +9,7 @@ class Marca:
 		return "<Marca %s>" % self.nome
 
 class Automobile:
-	def __init__(self, name, anno, marca, consumo):
+	def __init__(self, nome, anno, marca, consumo):
 		self.nome = nome
 		self.anno = anno
 		self.carburante = 0
