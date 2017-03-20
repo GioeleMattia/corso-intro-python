@@ -30,15 +30,15 @@ class Blackjack:
             sum += c[1]
         return sum
 
-    def ask_next(self, clist, courage= 1): 
+    def ask_next(self, clist, courage): 
         #courage: 1,2,3 #increasing
         delta = self.delta_cards(clist)
         if delta < 6 and courage == 1:
-            return False
-        if delta < 4 and courage == 2:
-            return False
-        if  delta < 2 and courage == 3:
-            return False
+            return True
+        elif delta < 4 and courage == 2:
+            return True
+        elif  delta < 2 and courage == 3:
+            return True
          
 
 if __name__ == '__main__':
@@ -65,7 +65,7 @@ if __name__ == '__main__':
         c = b.pop_card()
         print c
         ccounter_cards.append(c)
-        if b.ask_next(ccounter_cards) or b.sum_cards(ccounter_cards) >= 21:
+        if b.ask_next(ccounter_cards,1) or b.sum_cards(ccounter_cards) >= 21:
             again_ccounter = False
 
     ccounter_sum = b.sum_cards(ccounter_cards)
