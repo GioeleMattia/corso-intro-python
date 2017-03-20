@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-TOKEN = "341416978:AAEswV5m2KZTcXgjW1L0Y4TnQtS7Nv3qGm4"
+TOKEN = "371081553:AAHPGVIQ7bzRB7A-0DSrzkE4gqErSYLNczk"
 
 def start(bot, update):
     update.message.reply_text("Ciao!")

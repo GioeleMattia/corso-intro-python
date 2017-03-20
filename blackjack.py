@@ -18,7 +18,19 @@ class Blackjack:
 
     def delta_cards(self, clist):
         sum = self.sum_cards(clist)    
-        return 21 - sum        
+        return 21 - sum  
+
+    def delta_win(self, total):
+        return 21 - total
+
+    def get_winner(self, player1, player2):
+        d1 = self.delta_win(player1) 
+        d2 = self.delta_win(player2)
+
+        if d1 < 0 or (d2 >= 0 and d2 <= d1):
+            return 2
+        
+        return 1
 
     def pop_card(self):
         card = self.cards.pop(randint(0, len(self.cards)-1))
@@ -34,12 +46,13 @@ class Blackjack:
         #courage: 1,2,3 #increasing
         delta = self.delta_cards(clist)
         if delta < 6 and courage == 1:
-            return True
+            return False
         elif delta < 4 and courage == 2:
-            return True
+            return False
         elif  delta < 2 and courage == 3:
-            return True
-         
+            return False
+
+        return True
 
 if __name__ == '__main__':
     b = Blackjack()
@@ -65,18 +78,13 @@ if __name__ == '__main__':
         c = b.pop_card()
         print c
         ccounter_cards.append(c)
-        if b.ask_next(ccounter_cards,1) or b.sum_cards(ccounter_cards) >= 21:
+        ccounter_sum = b.sum_cards(ccounter_cards)
+        if not b.ask_next(ccounter_cards,randint(1,4)) or ccounter_sum >= 21:
             again_ccounter = False
 
-    ccounter_sum = b.sum_cards(ccounter_cards)
+
     print "Il banco ha ottenuto %s" % ccounter_sum
 
-    if user_sum > 21:
-        print "Hai perso"
-    elif ccounter_sum > 21:
-        print  "Hai vinto"
-    elif ccounter_sum > user_sum:
-        print "Hai perso"
-    else:
-        print "Hai vinto"
-
+    winner = b.get_winner(user_sum, ccounter_sum)
+    print "Vince %s (1: giocatore, 2:banco)" % winner
+    
